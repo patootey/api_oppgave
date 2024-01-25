@@ -1,6 +1,6 @@
 import tkinter
+import requests
 
-for i in range(50):
-    import tkinter
+response = requests.get("https://api.frankfurter.app/currencies")
 
-shitdown.py.hello
+print(response.json()["AUD"])
