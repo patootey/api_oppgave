@@ -2,18 +2,18 @@ import tkinter as tk  # Importerer tkinter-biblioteket for GUI
 from PIL import Image, ImageTk  # Importerer moduler for bildebehandling
 
 class Button:
-    def __init__(self, settings, command_config=None):
+    def __init__(self, root, settings, command_config=None):
         self.clicked = False
-        self.button = tk.Button(settings, command=self.click)
+        self.button = tk.Button(root, **settings, command=self.click)
         self.command_config = command_config
         self.settings = settings
     
     def click(self):
         self.clicked = True if self.clicked == False else False
         if self.clicked and self.command_config != None:
-            self.button.config(self.command_config)
+            self.button.config(**self.command_config)
         else:
-            self.button.config(self.settings)
+            self.button.config(**self.settings)
 
 prevpage = []  # En liste for å lagre tidligere visningskomponenter
 
