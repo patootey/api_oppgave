@@ -1,5 +1,6 @@
 import tkinter
 import requests
+from matplotlib import pyplot as plt
 
 currencies = requests.get("https://api.frankfurter.app/currencies")
 key = "https://api.frankfurter.app/"
