@@ -2,19 +2,34 @@ import tkinter
 import requests
 from matplotlib import pyplot as plt
 
-currencies = requests.get("https://api.frankfurter.app/currencies")
-key = "https://api.frankfurter.app/"
+class Currency():
+    def __init__(self):
+        self.key = "https://api.frankfurter.app/"
+    
+    def chooser(self):
+        self.fromCurrency = "from="+input("From (EUR): ")
+        self.toCurrency = "to="+input("To (NOK,USD,GBP): ")
+        return "?"+self.fromCurrency+"&"+self.toCurrency
 
-current = "latest"
-historical = "2008-09-15"
-fromDate,toDate = "2008-09-15..", "2017-09-15"
-query = False
-fromCurrency = "from=EUR"
-to = "to=USD"
+    def set_date(self):
+        self.startDate = input("Start (YYYY-MM-DD): ")
+        self.endDate = input("End (..YYYY-MM-DD): ")
 
-request = requests.get(key+current)
-request = request.json()
-print(f"I datoen {request['date']} hadde valutaen {currencies.json()['USD']} en verdi på {request['rates']['USD']} i {request['base']}")
-# print(currencies.json()["AUD"])
-newkey = requests.get(key+fromDate+toDate+"?"+fromCurrency+"&"+to)
-print(newkey.json())
+    def time(self):
+        check = input("Current values? Y/N: ")
+        if check.lower() == "y":
+            return "latest"
+        else:
+            self.set_date()
+            return self.startDate + self.endDate
+
+    def sammensveising(self):
+        self.key += self.time() + self.chooser()
+        print(self.key)
+        self.key = requests.get(self.key)
+        return self.key.json()
+    
+    def printer(self):
+        print(self.sammensveising())
+penge = Currency()
+penge.printer()
