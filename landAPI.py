@@ -19,7 +19,7 @@ def search(key:str):
                             for name in country['currencies']:
                                 symbol = name
                             return country['name']['common'], symbol, country['currencies'][symbol]["symbol"]
-    return f"Fant ikke land {key}"
+    return f"Fant ikke landet '{key}'."
                     
                     
 print(search("Norway"))
