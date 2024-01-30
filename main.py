@@ -23,13 +23,27 @@ class Currency():
             self.set_date()
             return self.startDate + self.endDate
 
-    def sammensveising(self):
+    def fetch_data(self):
         self.key += self.time() + self.chooser()
         print(self.key)
         self.key = requests.get(self.key)
         return self.key.json()
     
-    def printer(self):
-        print(self.sammensveising())
+    def list_maker(self):
+        goob = self.fetch_data()
+        base = goob['base']
+        rates = goob['rates']
+        values = []
+        for i in rates:
+            values.append(rates[i]['NOK'])
+        return values
+
+    def plotter(self):
+        data = self.list_maker()
+        plt.plot(data)
+        plt.ylabel(f"{self.toCurrency[3:]} i {self.fromCurrency[5:]}")
+        plt.xlabel(f"Tid fra {self.startDate} til {self.endDate}")
+        plt.show()
+        
 penge = Currency()
-penge.printer()
+penge.plotter()
