@@ -29,10 +29,12 @@ def main(root):
     button1.click()
     button1.command = lambda: default(button2,button1,label1,label2)
     
-    name1_entry = tk.Entry(root).grid(row=3, column=1)
-    name2_entry = tk.Entry(root).grid(row=3, column=2)
+    name1_entry = tk.Entry(root)
+    name1_entry.grid(row=3, column=1)
+    name2_entry = tk.Entry(root)
+    name2_entry.grid(row=3, column=2)
 
-    search = ge.Button(root, {"text":"Start Søk"}, command=lambda: rp.results(root))
+    search = ge.Button(root, {"text":"Start Søk"}, command=lambda: rp.results(root,name1_entry.get()))
     search.button.grid(row=4,column=1)
     root.mainloop()  # Starter GUI-hovedløkka for å vise vinduet
 

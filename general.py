@@ -2,8 +2,8 @@ import tkinter as tk  # Importerer tkinter-biblioteket for GUI
 from PIL import Image, ImageTk  # Importerer moduler for bildebehandling
 
 class Button:
-    def __init__(self, root, settings, command_config=None, command=None, clicked=False):
-        self.clicked = clicked
+    def __init__(self, root, settings, command_config=None, command=None):
+        self.clicked = False
         self.button = tk.Button(root, **settings, command=self.click)
         self.command_config = command_config
         self.settings = settings
@@ -18,8 +18,35 @@ class Button:
         if self.command:
             self.command()
     
+class Photo:
+    def __init__(
+        self,
+        root,
+        image_path,
+        size=(50, 50),
+        command=None,
+        button="<Button-1>",
+    ):
+        self.image_path = image_path  # Filbanen til bildet
+        self.size = size  # Størrelsen på bildet
+        self.command = command
+        self.button = button  # Knappen som brukes til å aktivere klikk-handling
+        self.image = None  # Variabel for bildet
+        self.label = None  # Variabel for etiketten som viser bildet
+        self.create_image(root)  # Oppretter bildet i GUI-en
 
+    def create_image(self, root):
+        photo = Image.open(self.image_path)  # Åpner bildet fra fil
+        photo = photo.resize(self.size, Image.ADAPTIVE)  # Justerer størrelsen på bildet
+        self.image = ImageTk.PhotoImage(
+            photo
+        )  # Konverterer bildet til PhotoImage-format
+        self.label = tk.Label(root, image=self.image)  # Oppretter en etikett med bildet
 
+        if self.command:
+            # Binder klikk-handling til bildet hvis en funksjon er angitt
+            self.label.bind(self.button, lambda event: self.command())
+        
 prevpage = []  # En liste for å lagre tidligere visningskomponenter
 
 
