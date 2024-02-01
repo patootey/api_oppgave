@@ -38,14 +38,22 @@ class Photo:
         self.create_image(root)  # Oppretter bildet i GUI-en
 
     def create_image(self, root):
-        response = requests.get(self.image_path)
-        if response.status_code == 200:
-            image_data = response.content
-            image = Image.open(BytesIO(image_data))
-            photo_image = ImageTk.PhotoImage(image)
-            label = tk.Label(root, image=photo_image)
-            label.image = photo_image  # Keep a reference to prevent garbage collection
-            self.label = label
+        try:
+            photo = Image.open(self.image_path)  # Åpner bildet fra fil
+            photo = photo.resize(self.size, Image.ADAPTIVE)  # Justerer størrelsen på bildet
+            self.image = ImageTk.PhotoImage(
+            photo
+            )  # Konverterer bildet til PhotoImage-format
+            self.label = tk.Label(root, image=self.image)  # Oppretter en etikett med bildet
+        except:
+            response = requests.get(self.image_path)
+            if response.status_code == 200:
+                image_data = response.content
+                image = Image.open(BytesIO(image_data))
+                photo_image = ImageTk.PhotoImage(image)
+                label = tk.Label(root, image=photo_image)
+                label.image = photo_image  # Keep a reference to prevent garbage collection
+                self.label = label
 
         if self.command:
             # Binder klikk-handling til bildet hvis en funksjon er angitt

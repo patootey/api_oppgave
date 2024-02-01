@@ -16,25 +16,30 @@ def default(buttonA, buttonB, label1, label2):
 
 def main(root):
     ge.clear_window(root)  # Kaller en funksjon for å fjerne alle widgets fra vinduet
-    label1 = tk.Label(root, text="Søk med Land A")
+    frame = tk.Frame(root, width=root.winfo_width(), height=root.winfo_height())  # Set a background color and dimensions for visibility
+    frame.place(y=50)
+    arrow = ge.Photo(root, image_path="./images/arrow.png", size=(10,10),command=lambda: ge.load_page(root,ge.prevpage))
+    arrow.label.place(y=0,x=0)
+
+    label1 = tk.Label(frame, text="Søk med Land A")
     label1.grid(row=2, column=1)
 
-    label2 = tk.Label(root, text="Søk med Land B")
+    label2 = tk.Label(frame, text="Søk med Land B")
     label2.grid(row=2, column=2)
 
-    button1 = ge.Button(root, {"text":"Søk med Land" , "bg":"white"}, command_config=({"bg":"green"}))
+    button1 = ge.Button(frame, {"text":"Søk med Land" , "bg":"white"}, command_config=({"bg":"green"}))
     button1.button.grid(row=1, column=1)
-    button2 = ge.Button(root, {"text":"Søk med valuta" , "bg":"white"}, command_config=({"bg":"green"}), command=lambda: default(button1,button2,label1,label2))
+    button2 = ge.Button(frame, {"text":"Søk med valuta" , "bg":"white"}, command_config=({"bg":"green"}), command=lambda: default(button1,button2,label1,label2))
     button2.button.grid(row=1, column=2)
     button1.click()
     button1.command = lambda: default(button2,button1,label1,label2)
     
-    name1_entry = tk.Entry(root)
+    name1_entry = tk.Entry(frame)
     name1_entry.grid(row=3, column=1)
-    name2_entry = tk.Entry(root)
+    name2_entry = tk.Entry(frame)
     name2_entry.grid(row=3, column=2)
 
-    search = ge.Button(root, {"text":"Start Søk"}, command=lambda: rp.results(root,name1_entry.get(), name2_entry.get(), button1.clicked))
+    search = ge.Button(frame, {"text":"Start Søk"}, command=lambda: rp.results(root,name1_entry.get(), name2_entry.get(), button1.clicked))
     search.button.grid(row=4,column=1)
     root.mainloop()  # Starter GUI-hovedløkka for å vise vinduet
 
