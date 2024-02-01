@@ -34,9 +34,10 @@ def main(root):
     name2_entry = tk.Entry(root)
     name2_entry.grid(row=3, column=2)
 
-    search = ge.Button(root, {"text":"Start Søk"}, command=lambda: rp.results(root,name1_entry.get()))
+    search = ge.Button(root, {"text":"Start Søk"}, command=lambda: rp.results(root,name1_entry.get(), name2_entry.get(), button1.clicked))
     search.button.grid(row=4,column=1)
     root.mainloop()  # Starter GUI-hovedløkka for å vise vinduet
 
 
 main(r)
+r.mainloop()
