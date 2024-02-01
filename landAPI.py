@@ -18,13 +18,6 @@ def search(key:str):
                         if key.lower() in country['name'][i][x][z].lower():
                             for name in country['currencies']:
                                 symbol = name
-                            return country['name']['common'], symbol, country['currencies'][symbol]["symbol"], country['flags']['svg']
+                            return country['name']['common'], symbol, country['currencies'][symbol]["symbol"], country['flags']['png']
     return f"Fant ikke landet '{key}'."
                     
-                    
-print(search("Norway"))
-print(search("Norge"))
-print(search("briTain"))
-print(search("Lugudo"))
-print(search("vietnam"))
-print(search("deutschland"))

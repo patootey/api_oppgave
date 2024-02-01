@@ -2,14 +2,45 @@ import tkinter
 import requests
 from matplotlib import pyplot as plt
 
+countries = requests.get("https://restcountries.com/v3.1/all")
+countries = countries.json()
+def search(key:str):
+    for country in countries:
+            
+        for i in country['name']:
+            if i != "nativeName" and key.lower() in country['name'][i].lower():
+                for name in country['currencies']:
+                    symbol = name
+                return country['name']['common'], symbol, country['currencies'][symbol]["symbol"], country['flags']['png']
+                
+
+            elif i == "nativeName":
+                for x in country['name'][i]:
+                    for z in country['name'][i][x]:
+                        if key.lower() in country['name'][i][x][z].lower():
+                            for name in country['currencies']:
+                                symbol = name
+                            return country['name']['common'], symbol, country['currencies'][symbol]["symbol"], country['flags']['png']
+    return f"Fant ikke landet '{key}'."
+
 class Currency():
     def __init__(self):
         self.key = "https://api.frankfurter.app/"
+        self.query = input("Land(1) eller valuta(2): ")
     
     def chooser(self):
-        self.fromCurrency = "from="+input("From (EUR): ")
-        self.toCurrency1 = "to="+input("First to (NOK): ")
-        self.toCurrency2 = input("Other to: ")
+        if int(self.query) == 1:
+            self.fromCurrency = search(input("Gi land fra: "))
+            self.toCurrency1 = search(input("Gi land til 1: "))
+            self.toCurrency2 = search(input("Gi land til 2: "))
+
+            self.fromCurrency = "from="+self.fromCurrency[1]
+            self.toCurrency1 = "to="+self.toCurrency1[1]
+            self.toCurrency2 = self.toCurrency2[1]
+        else:
+            self.fromCurrency = "from="+input("From (EUR): ")
+            self.toCurrency1 = "to="+input("First to (NOK): ")
+            self.toCurrency2 = input("Other to: ")
         return "?"+self.fromCurrency+"&"+self.toCurrency1+","+self.toCurrency2
 
     def set_date(self):
@@ -23,6 +54,10 @@ class Currency():
         else:
             self.set_date()
             return self.startDate + self.endDate
+    
+    def real_time(self):
+        raw_data = self.fetch_data()
+        print(raw_data['rates'])
 
     def fetch_data(self):
         self.key += self.time() + self.chooser()
@@ -32,6 +67,7 @@ class Currency():
     
     def list_maker(self):
         raw_data = self.fetch_data()
+        print(raw_data)
         rates = raw_data['rates']
         values1,values2 = [],[]
         for i in rates:
