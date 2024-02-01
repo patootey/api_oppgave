@@ -9,7 +9,7 @@ def search(key:str):
             if i != "nativeName" and key.lower() in country['name'][i].lower():
                 for name in country['currencies']:
                     symbol = name
-                return country['name']['common'], symbol, country['currencies'][symbol]["symbol"], country['flags']['svg']
+                return country['name']['common'], symbol, country['currencies'][symbol]["symbol"], country['flags']['png']
                 
 
             elif i == "nativeName":
