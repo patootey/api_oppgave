@@ -14,7 +14,7 @@ def results(root, key1, key2, key3, country, start_date, end_date):
             for i in range(2):
                 name_label = tk.Label(frame, text=data[i-1][0], font=(ge.font, 30, "bold"))
                 name_label.grid(row=1, column=1 if i == 1 else 3)
-                flag = ge.Photo(frame, image_path=data[i-1][3])
+                flag = ge.Photo(frame, image_path=data[i-1][4])
                 flag.label.grid(row=2, column=1 if i == 1 else 3)
             
 
@@ -23,7 +23,7 @@ def results(root, key1, key2, key3, country, start_date, end_date):
 
     
         for i in range(2):
-            text = tk.Label(frame, text=f"Name: {data[i-1][0]}\nCode: {data[i-1][1]}\nSymbol: {data[i-1][2]}")
+            text = tk.Label(frame, text=f"Name: {data[i-1][1]}\nCode: {data[i-1][2]}\nSymbol: {data[i-1][3]}")
             text.grid(row=3, column= 1 if i == 1 else 3)
         
 
