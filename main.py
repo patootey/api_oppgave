@@ -45,9 +45,9 @@ class Currency():
             self.toCurrency1 = search(input("Gi land til 1: "))
             self.toCurrency2 = search(input("Gi land til 2: "))
 
-            self.fromCurrency = "from="+self.fromCurrency[1]
-            self.toCurrency1 = "to="+self.toCurrency1[1]
-            self.toCurrency2 = self.toCurrency2[1]
+            self.fromCurrency = "from="+self.fromCurrency[2]
+            self.toCurrency1 = "to="+self.toCurrency1[2]
+            self.toCurrency2 = self.toCurrency2[2]
         else:
             self.fromCurrency = "from="+input("From (EUR): ")
             self.toCurrency1 = "to="+input("First to (NOK): ")
@@ -76,8 +76,10 @@ class Currency():
         rates = raw_data['rates']
         values1,values2 = [],[]
         for i in rates:
-            values1.append(rates[i][self.toCurrency1[3:]])
-            values2.append(rates[i][self.toCurrency2])
+            try:values1.append(rates[i][self.toCurrency1[3:]])
+            except:pass
+            try:values2.append(rates[i][self.toCurrency2])
+            except:pass
         return values1,values2
 
     def plotter(self, data=None):
@@ -92,4 +94,4 @@ class Currency():
         plt.show()
         
 penge = Currency()
-penge.plotter()
+penge.plotter(search('russia'))
