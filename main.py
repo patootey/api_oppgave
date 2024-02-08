@@ -30,7 +30,7 @@ def search(key:str):
                         return country['name']['common'], i, country['currencies'][i]["symbol"], country['flags']['png']
         except:
             pass
-        
+
     return f"Fant ikke landet '{key}'."
 
 class Currency():
@@ -43,7 +43,6 @@ class Currency():
             self.fromCurrency = search(input("Gi land fra: "))
             self.toCurrency1 = search(input("Gi land til 1: "))
             self.toCurrency2 = search(input("Gi land til 2: "))
-            print(self.fromCurrency)
 
             self.fromCurrency = "from="+self.fromCurrency[1]
             self.toCurrency1 = "to="+self.toCurrency1[1]
