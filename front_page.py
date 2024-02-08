@@ -16,7 +16,7 @@ def default(buttonA, buttonB, label1, label2):
 
 def main(root):
     ge.clear_window(root)  # Kaller en funksjon for å fjerne alle widgets fra vinduet
-    frame = tk.Frame(root, width=root.winfo_width(), height=root.winfo_height())  # Set a background color and dimensions for visibility
+    frame = tk.Frame(root, width=root.winfo_width(), height=root.winfo_height()) 
     frame.place(y=50)
     arrow = ge.Photo(root, image_path="./images/arrow.png", size=(40,40),command=lambda: ge.load_page(root,ge.prevpage))
     arrow.label.place(y=0,x=0)
@@ -58,7 +58,7 @@ def main(root):
 
 
 
-    search = ge.Button(frame, {"text":"Start Søk"}, command=lambda: rp.results(root,name1_entry.get(), name2_entry.get(), name3_entry.get(), button1.clicked))
+    search = ge.Button(frame, {"text":"Start Søk"}, command=lambda: rp.results(root,name1_entry.get(), name2_entry.get(), name3_entry.get(), button1.clicked, start_date__entry.get(), end_date_entry.get()))
     search.button.grid(row=6,column=1)
 
 

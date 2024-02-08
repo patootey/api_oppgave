@@ -2,14 +2,14 @@ import tkinter as tk
 import general as ge
 import landAPI as la
 
-def results(root, key1, key2, key3, country):
+def results(root, key1, key2, key3, country, start_date, end_date):
     ge.savedWidgets[0].config(text="")
     ge.prevpage = ge.keep_page(root)
-    frame = tk.Frame(root, width=root.winfo_width(), height=root.winfo_height())  # Set a background color and dimensions for visibility
-    frame.place(y=50)  # Adjust coordinates as needed
+    frame = tk.Frame(root, width=root.winfo_width(), height=root.winfo_height()) 
+    frame.place(y=50)  
     try:
+        data = (la.search(key1), la.search(key2))
         if country:
-            data = (la.search(key1), la.search(key2))
 
             for i in range(2):
                 name_label = tk.Label(frame, text=data[i-1][0], font=(ge.font, 30, "bold"))
