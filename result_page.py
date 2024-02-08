@@ -3,23 +3,37 @@ import general as ge
 import landAPI as la
 
 def results(root, key1, key2, country):
+    ge.savedWidgets[0].config(text="")
     ge.prevpage = ge.keep_page(root)
-    frame = tk.Frame(root, bg='red', width=root.winfo_width(), height=root.winfo_height())  # Set a background color and dimensions for visibility
+    frame = tk.Frame(root, width=root.winfo_width(), height=root.winfo_height())  # Set a background color and dimensions for visibility
     frame.place(y=50)  # Adjust coordinates as needed
     try:
         if country:
-            image_url1 = la.search(key1)[3]
-            image_url2 = la.search(key2)[3]
+            data = (la.search(key1), la.search(key2))
 
-            flag1 = ge.Photo(frame, image_path=image_url1)
-            flag1.label.place(x=0, y=0)
+            name_label1 = tk.Label(frame, text=data[0][0], font=(ge.font, 30, "bold"))
+            name_label1.grid(row=1, column=1)
+            flag1 = ge.Photo(frame, image_path=data[0][3])
+            flag1.label.grid(row=2, column=1)
 
-            flag2 = ge.Photo(frame, image_path=image_url2)
-            flag2.label.place(x=100, y=0)
-            print("HABSAD")
+            name_label2 = tk.Label(frame, text=data[1][0], font=(ge.font, 30, "bold"))
+            name_label2.grid(row=1, column=3)
+            flag2 = ge.Photo(frame, image_path=data[1][3])
+            flag2.label.grid(row=2, column=3)
+
+        vs_label = tk.Label(frame, text="VS", font=(ge.font, 30, "bold"))
+        vs_label.grid(row=1, column=2)
+
+    
+        for i in range(2):
+            text = tk.Label(frame, text=f"Name: {data[i-1][0]}\nCode: {data[i-1][1]}\nSymbol: {data[i-1][2]}")
+            text.grid(row=3, column= 1 if i == 1 else 3)
+        
 
     except Exception as e:
+        data = (la.search(key1), la.search(key2))
         ge.load_page(root, ge.prevpage)
         print("Error occurred:", str(e))
-        print(la.search(key1))
-        print(la.search(key2))
+        error = data[0] if type(data[0]) == str else data[1]
+        ge.savedWidgets[0].config(text=error)
+
