@@ -21,21 +21,21 @@ def main(root):
     arrow = ge.Photo(root, image_path="./images/arrow.png", size=(40,40),command=lambda: ge.load_page(root,ge.prevpage))
     arrow.label.place(y=0,x=0)
 
-    label1 = tk.Label(frame, text="Søk med Land A")
-    label1.grid(row=2, column=1)
+    name_label1 = tk.Label(frame, text="Søk med Land A")
+    name_label1.grid(row=2, column=1)
 
-    label2 = tk.Label(frame, text="Søk med Land B")
-    label2.grid(row=2, column=2)
+    name_label2 = tk.Label(frame, text="Søk med Land B")
+    name_label2.grid(row=2, column=2)
 
-    label3 = tk.Label(frame, text="Default ting")
-    label3.grid(row=2, column=3)
+    name_label3 = tk.Label(frame, text="Default ting")
+    name_label3.grid(row=2, column=3)
 
     button1 = ge.Button(frame, {"text":"Søk med Land" , "bg":"white"}, command_config=({"bg":"green"}))
     button1.button.grid(row=1, column=1)
-    button2 = ge.Button(frame, {"text":"Søk med valuta" , "bg":"white"}, command_config=({"bg":"green"}), command=lambda: default(button1,button2,label1,label2))
+    button2 = ge.Button(frame, {"text":"Søk med valuta" , "bg":"white"}, command_config=({"bg":"green"}), command=lambda: default(button1,button2,name_label1,name_label2))
     button2.button.grid(row=1, column=2)
     button1.click()
-    button1.command = lambda: default(button2,button1,label1,label2)
+    button1.command = lambda: default(button2,button1,name_label1,name_label2)
     
     name1_entry = tk.Entry(frame)
     name1_entry.grid(row=3, column=1)
@@ -45,8 +45,21 @@ def main(root):
     name3_entry.grid(row=3, column=3)
 
 
+    start_date_label = tk.Label(frame, text="Start dato")
+    start_date_label.grid(row=4, column=1)
+    end_date_label = tk.Label(frame, text="Slutt dato")
+    end_date_label.grid(row=4, column=2)
+
+    start_date__entry = tk.Entry(frame)
+    start_date__entry.grid(row=5, column=1)
+    end_date_entry = tk.Entry(frame)
+    end_date_entry.grid(row=5, column=2)
+
+
+
+
     search = ge.Button(frame, {"text":"Start Søk"}, command=lambda: rp.results(root,name1_entry.get(), name2_entry.get(), name3_entry.get(), button1.clicked))
-    search.button.grid(row=4,column=1)
+    search.button.grid(row=6,column=1)
 
 
     error_message = tk.Label(root, fg="red")

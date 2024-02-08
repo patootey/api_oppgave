@@ -21,6 +21,16 @@ def search(key:str):
                             for name in country['currencies']:
                                 symbol = name
                             return country['name']['common'], symbol, country['currencies'][symbol]["symbol"], country['flags']['png']
+        try:
+            for i in country['currencies']:
+                if key.lower() == i.lower():
+                    return country['name']['common'], i, country['currencies'][i]["symbol"], country['flags']['png']
+                for x in country['currencies'][i]:
+                    if key.lower() == country['currencies'][i][x].lower():
+                        return country['name']['common'], i, country['currencies'][i]["symbol"], country['flags']['png']
+        except:
+            pass
+        
     return f"Fant ikke landet '{key}'."
 
 class Currency():
@@ -33,6 +43,7 @@ class Currency():
             self.fromCurrency = search(input("Gi land fra: "))
             self.toCurrency1 = search(input("Gi land til 1: "))
             self.toCurrency2 = search(input("Gi land til 2: "))
+            print(self.fromCurrency)
 
             self.fromCurrency = "from="+self.fromCurrency[1]
             self.toCurrency1 = "to="+self.toCurrency1[1]
@@ -46,21 +57,11 @@ class Currency():
     def set_date(self):
         self.startDate = input("Start (YYYY-MM-DD): ")
         self.endDate = input("End (..YYYY-MM-DD): ")
+        return self.startDate + self.endDate
 
-    def time(self):
-        check = input("Current values? Y/N: ")
-        if check.lower() == "y":
-            return "latest"
-        else:
-            self.set_date()
-            return self.startDate + self.endDate
-    
-    def real_time(self):
-        raw_data = self.fetch_data()
-        print(raw_data['rates'])
 
     def fetch_data(self):
-        self.key += self.time() + self.chooser()
+        self.key += self.set_date() + self.chooser()
         print(self.key)
         self.key = requests.get(self.key)
         return self.key.json()
