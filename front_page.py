@@ -18,7 +18,7 @@ def main(root):
     ge.clear_window(root)  # Kaller en funksjon for å fjerne alle widgets fra vinduet
     frame = tk.Frame(root, width=root.winfo_width(), height=root.winfo_height())  # Set a background color and dimensions for visibility
     frame.place(y=50)
-    arrow = ge.Photo(root, image_path="./images/arrow.png", size=(10,10),command=lambda: ge.load_page(root,ge.prevpage))
+    arrow = ge.Photo(root, image_path="./images/arrow.png", size=(40,40),command=lambda: ge.load_page(root,ge.prevpage))
     arrow.label.place(y=0,x=0)
 
     label1 = tk.Label(frame, text="Søk med Land A")
@@ -41,6 +41,11 @@ def main(root):
 
     search = ge.Button(frame, {"text":"Start Søk"}, command=lambda: rp.results(root,name1_entry.get(), name2_entry.get(), button1.clicked))
     search.button.grid(row=4,column=1)
+
+
+    error_message = tk.Label(root, fg="red")
+    error_message.place(x=70,y=0)
+    ge.save_widget(error_message)
     root.mainloop()  # Starter GUI-hovedløkka for å vise vinduet
 
 

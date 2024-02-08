@@ -3,6 +3,8 @@ from PIL import Image, ImageTk  # Importerer moduler for bildebehandling
 import requests
 from io import BytesIO
 
+font = "Helvetica"
+
 class Button:
     def __init__(self, root, settings, command_config=None, command=None):
         self.clicked = False
