@@ -19,5 +19,17 @@ def search(key:str):
                             for name in country['currencies']:
                                 symbol = name
                             return country['name']['common'], symbol, country['currencies'][symbol]["symbol"], country['flags']['png']
-    return f"Fant ikke landet '{key}'."
+        try:
+            for i in country['currencies']:
+                if key.lower() == i.lower():
+                    return country['name']['common'], i, country['currencies'][i]["symbol"], country['flags']['png']
+                for x in country['currencies'][i]:
+                    if key.lower() == country['currencies'][i][x].lower():
+                        return country['name']['common'], i, country['currencies'][i]["symbol"], country['flags']['png']
+        except:
+            pass
+    
+    return f"Fant ikke {key}."
                     
+print(search("British Pound"))
+print(search("NOK"))
