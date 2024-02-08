@@ -27,6 +27,9 @@ def main(root):
     label2 = tk.Label(frame, text="Søk med Land B")
     label2.grid(row=2, column=2)
 
+    label3 = tk.Label(frame, text="Default ting")
+    label3.grid(row=2, column=3)
+
     button1 = ge.Button(frame, {"text":"Søk med Land" , "bg":"white"}, command_config=({"bg":"green"}))
     button1.button.grid(row=1, column=1)
     button2 = ge.Button(frame, {"text":"Søk med valuta" , "bg":"white"}, command_config=({"bg":"green"}), command=lambda: default(button1,button2,label1,label2))
@@ -38,8 +41,11 @@ def main(root):
     name1_entry.grid(row=3, column=1)
     name2_entry = tk.Entry(frame)
     name2_entry.grid(row=3, column=2)
+    name3_entry = tk.Entry(frame)
+    name3_entry.grid(row=3, column=3)
 
-    search = ge.Button(frame, {"text":"Start Søk"}, command=lambda: rp.results(root,name1_entry.get(), name2_entry.get(), button1.clicked))
+
+    search = ge.Button(frame, {"text":"Start Søk"}, command=lambda: rp.results(root,name1_entry.get(), name2_entry.get(), name3_entry.get(), button1.clicked))
     search.button.grid(row=4,column=1)
 
 

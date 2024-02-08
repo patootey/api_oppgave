@@ -65,8 +65,12 @@ class Currency():
         self.key = requests.get(self.key)
         return self.key.json()
     
-    def list_maker(self):
-        raw_data = self.fetch_data()
+    
+    
+    def list_maker(self, data):
+        raw_data = data
+        if data != None:
+            raw_data = self.fetch_data()
         print(raw_data)
         rates = raw_data['rates']
         values1,values2 = [],[]
@@ -75,8 +79,8 @@ class Currency():
             values2.append(rates[i][self.toCurrency2])
         return values1,values2
 
-    def plotter(self):
-        data = self.list_maker()
+    def plotter(self, data=None):
+        data = self.list_maker(data)
         plt.grid()
         plt.plot(data[0], color="blue")
         plt.plot(data[1], color="red")

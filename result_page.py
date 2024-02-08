@@ -2,7 +2,7 @@ import tkinter as tk
 import general as ge
 import landAPI as la
 
-def results(root, key1, key2, country):
+def results(root, key1, key2, key3, country):
     ge.savedWidgets[0].config(text="")
     ge.prevpage = ge.keep_page(root)
     frame = tk.Frame(root, width=root.winfo_width(), height=root.winfo_height())  # Set a background color and dimensions for visibility
@@ -11,15 +11,12 @@ def results(root, key1, key2, country):
         if country:
             data = (la.search(key1), la.search(key2))
 
-            name_label1 = tk.Label(frame, text=data[0][0], font=(ge.font, 30, "bold"))
-            name_label1.grid(row=1, column=1)
-            flag1 = ge.Photo(frame, image_path=data[0][3])
-            flag1.label.grid(row=2, column=1)
-
-            name_label2 = tk.Label(frame, text=data[1][0], font=(ge.font, 30, "bold"))
-            name_label2.grid(row=1, column=3)
-            flag2 = ge.Photo(frame, image_path=data[1][3])
-            flag2.label.grid(row=2, column=3)
+            for i in range(2):
+                name_label = tk.Label(frame, text=data[i-1][0], font=(ge.font, 30, "bold"))
+                name_label.grid(row=1, column=1 if i == 1 else 3)
+                flag = ge.Photo(frame, image_path=data[i-1][3])
+                flag.label.grid(row=2, column=1 if i == 1 else 3)
+            
 
         vs_label = tk.Label(frame, text="VS", font=(ge.font, 30, "bold"))
         vs_label.grid(row=1, column=2)
