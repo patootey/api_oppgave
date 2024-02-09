@@ -27,12 +27,13 @@ class Photo:
         self,
         root,
         image_path,
-        size=(50, 50),
+        height=50,
         command=None,
         button="<Button-1>",
     ):
         self.image_path = image_path  # Filbanen til bildet
-        self.size = size  # Størrelsen på bildet
+        self.height = height  # Størrelsen på bildet
+        self.formatX = None
         self.command = command
         self.button = button  # Knappen som brukes til å aktivere klikk-handling
         self.image = None  # Variabel for bildet
@@ -42,19 +43,23 @@ class Photo:
     def create_image(self, root):
         try:
             photo = Image.open(self.image_path)  # Åpner bildet fra fil
-            photo = photo.resize(self.size, Image.ADAPTIVE)  # Justerer størrelsen på bildet
+            self.formatX = photo.width/photo.height
+            photo = photo.resize((int(self.height*self.formatX), self.height), Image.ADAPTIVE)  # Justerer størrelsen på bildet
             self.image = ImageTk.PhotoImage(
             photo
             )  # Konverterer bildet til PhotoImage-format
             self.label = tk.Label(root, image=self.image)  # Oppretter en etikett med bildet
-        except:
+        except Exception as e:
+            print(e)
             response = requests.get(self.image_path)
             if response.status_code == 200:
                 image_data = response.content
                 image = Image.open(BytesIO(image_data))
-                photo_image = ImageTk.PhotoImage(image)
-                label = tk.Label(root, image=photo_image)
-                label.image = photo_image  # Keep a reference to prevent garbage collection
+                self.formatX = image.width/image.height
+                image= image.resize((int(self.height*self.formatX), self.height), Image.ADAPTIVE)
+                self.image = ImageTk.PhotoImage(image)
+                label = tk.Label(root, image=self.image)
+                label.image = self.image  # Keep a reference to prevent garbage collection
                 self.label = label
 
         if self.command:
