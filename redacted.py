@@ -1,9 +1,9 @@
-# currencies = requests.get("https://api.frankfurter.app/currencies")
+import requests
+currencies = requests.get("https://api.frankfurter.app/currencies")
+currencies = currencies.json()
 
-list = ["USD","EUR","NOK"]
-string = ""
-for i in list:string+=i+","
-
+for i in currencies:
+    print(i)
 
 # current = "latest"
 # historical = "2008-09-15"

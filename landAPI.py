@@ -31,7 +31,3 @@ def search(key:str):
             pass
 
     return f"Fant ikke landet '{key}'."
-                    
-print(search("British Pound"))
-print(search("NOK"))
-print(search("$"))
