@@ -18,7 +18,7 @@ def main(root):
     ge.clear_window(root)  # Kaller en funksjon for å fjerne alle widgets fra vinduet
     frame = tk.Frame(root, width=root.winfo_width(), height=root.winfo_height()) 
     frame.place(y=50)
-    arrow = ge.Photo(root, image_path="./images/arrow.png", size=(40,40),command=lambda: ge.load_page(root,ge.prevpage))
+    arrow = ge.Photo(root, image_path="./images/arrow.png", height=40 ,command=lambda: ge.load_page(root,ge.prevpage))
     arrow.label.place(y=0,x=0)
 
     name_label1 = tk.Label(frame, text="Søk med Land A")
