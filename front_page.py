@@ -1,7 +1,7 @@
 import tkinter as tk
 import general as ge
 import result_page as rp
-import help_page as hp
+import os
 
 
 r = tk.Tk()  # Oppretter et hovedvindu (root) for GUI-en
@@ -62,7 +62,7 @@ def main(root):
     search = ge.Button(frame, {"text":"Start Søk"}, command=lambda: rp.results(root,name1_entry.get(), name2_entry.get(), name3_entry.get(), button1.clicked, start_date__entry.get(), end_date_entry.get()))
     search.button.grid(row=6,column=1)
 
-    help_button = ge.Button(frame, {"text": "HJELP"}, command=lambda: hp.help(root))
+    help_button = ge.Button(frame, {"text": "HJELP"}, command=lambda: "SDJAD")
     help_button.button.grid(row=6, column=3)
 
 
