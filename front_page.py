@@ -28,7 +28,7 @@ def main(root):
     name_label2 = tk.Label(frame, text="Søk med Land B")
     name_label2.grid(row=2, column=2)
 
-    name_label3 = tk.Label(frame, text="Default ting")
+    name_label3 = tk.Label(frame, text="Referanse")
     name_label3.grid(row=2, column=3)
 
     button1 = ge.Button(frame, {"text":"Søk med Land" , "bg":"white"}, command_config=({"bg":"green"}))
