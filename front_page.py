@@ -1,7 +1,7 @@
 import tkinter as tk
 import general as ge
 import result_page as rp
-import os
+from PIL import Image
 
 
 r = tk.Tk()  # Oppretter et hovedvindu (root) for GUI-en
@@ -15,14 +15,6 @@ def default(buttonA, buttonB, label1, label2):
     label1.config(text=str(buttonB.settings["text"])+" A")
     label2.config(text=str(buttonB.settings["text"])+" B")
 
-
-def manual(root):
-    ge.prevpage = ge.keep_page(root)
-    frame = tk.Frame(root, width=root.winfo_width(), height=root.winfo_height()) 
-    frame.place(y=50)
-
-    help_image = ge.Photo(frame, image_path="./images/brukerveiledning.png", height=50)
-    help_image.label.grid(row=1, column=1)
 
 def main(root):
     ge.clear_window(root)  # Kaller en funksjon for å fjerne alle widgets fra vinduet
@@ -71,7 +63,8 @@ def main(root):
     search = ge.Button(frame, {"text":"Start Søk"}, command=lambda: rp.results(root,name1_entry.get(), name2_entry.get(), name3_entry.get(), button1.clicked, start_date__entry.get(), end_date_entry.get()))
     search.button.grid(row=6,column=1)
 
-    help_button = ge.Button(frame, {"text": "HJELP"}, command=lambda: manual(root))
+    help_image = Image.open("./images/brukerveiledning.png")
+    help_button = ge.Button(frame, {"text": "HJELP"}, command=lambda: help_image.show())
     help_button.button.grid(row=6, column=3)
 
 

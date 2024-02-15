@@ -88,7 +88,7 @@ def keep_page(root):
 
 # Funksjon for å laste inn tidligere visningskomponenter i 'page'
 def load_page(root, page):
-    if page is not None:
+    if len(page) > 0:
         clear_window(root, page=page)
         for widget in page:
             widget.place()

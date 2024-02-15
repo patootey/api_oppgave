@@ -65,8 +65,8 @@ def results(root, key1, key2, key3, country, start_date, end_date):
             if type(data[i-1]) == str:
                 error = f"Fant ikke {'landet' if country else 'valutaen'} {keys[i-1]}"
         if data[0][2] == data[1][2] and data[0][2] == data[2][2]:
-            error = f"Alt er jo {data[0] [1]} din idiot"
-        else:
+            error = f"Alle verdier er {data[0] [1]}, graf kan ikke vises"
+        elif error == None:
             error = f"Datoene stemmer ikke YYYY-MM-DD"
         
         ge.savedWidgets[0].config(text=error)
