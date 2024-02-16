@@ -153,8 +153,8 @@ class Currency():
         ax.legend([self.toCurrency1[2],self.toCurrency2[2]])
         error = []
         for i in data:
-            if len(data[i]) == 0:
-                error.append(i)
+            if len(i) == 0 or len(i) < len(data[0] if data[1] == i else data[1]):
+                error.append(0 if i == data[0] else 1)
         return fig, error
         
 penge = Currency()

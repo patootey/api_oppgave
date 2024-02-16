@@ -1,6 +1,7 @@
 import tkinter as tk
 import general as ge
 import result_page as rp
+from PIL import Image
 
 
 r = tk.Tk()  # Oppretter et hovedvindu (root) for GUI-en
@@ -13,6 +14,7 @@ def default(buttonA, buttonB, label1, label2):
     buttonA.clicked = True if buttonA.clicked == False else False
     label1.config(text=str(buttonB.settings["text"])+" A")
     label2.config(text=str(buttonB.settings["text"])+" B")
+
 
 def main(root):
     ge.clear_window(root)  # Kaller en funksjon for å fjerne alle widgets fra vinduet
@@ -27,7 +29,7 @@ def main(root):
     name_label2 = tk.Label(frame, text="Søk med Land B")
     name_label2.grid(row=2, column=2)
 
-    name_label3 = tk.Label(frame, text="Default ting")
+    name_label3 = tk.Label(frame, text="Referanse")
     name_label3.grid(row=2, column=3)
 
     button1 = ge.Button(frame, {"text":"Søk med Land" , "bg":"white"}, command_config=({"bg":"green"}))
@@ -60,6 +62,10 @@ def main(root):
 
     search = ge.Button(frame, {"text":"Start Søk"}, command=lambda: rp.results(root,name1_entry.get(), name2_entry.get(), name3_entry.get(), button1.clicked, start_date__entry.get(), end_date_entry.get()))
     search.button.grid(row=6,column=1)
+
+    help_image = Image.open("./images/brukerveiledning.png")
+    help_button = ge.Button(frame, {"text": "HJELP"}, command=lambda: help_image.show())
+    help_button.button.grid(row=6, column=3)
 
 
     error_message = tk.Label(root, fg="red")
