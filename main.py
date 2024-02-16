@@ -3,10 +3,10 @@ from matplotlib import pyplot as plt
 
 def search(key:str):
     """
-    Funksjon for å søke gjennom rescountries API der den returnerer landets navn, valutanavn, 
+    Funksjon for å søke gjennom restcountries API der den returnerer landets navn, valutanavn
     -kode og -symbol, og en PNG av landets flagg
 
-    Parametre:
+    Parametere:
         key (string): Nøkkelen brukeren oppgir for å søke i datasettet
     """
     countries = requests.get("https://restcountries.com/v3.1/all")
@@ -77,7 +77,7 @@ class Currency():
 
         Attributter:
             startDate (string): starten på intervallet som skrives i formatet slik vist
-            endDate   (string): slutten på intervallet, der kun .. gir verdier til dags dato
+            endDate   (string): slutten på intervallet, der to punktum (..) gir verdier til dags dato
         
         Returnerer:
             En sammenslåing av de to strengene over som skal legges til i key
@@ -92,7 +92,7 @@ class Currency():
         Metode som slår sammen key og ber om dataen fra API-et
 
         Returnerer:
-            Dataen fra API i json format som tilsvarer en dictionary i Python
+            Dataen fra API i JSON format som tilsvarer en dictionary i Python
         """
         self.key += self.set_date() + self.chooser()
         print(self.key)
@@ -106,7 +106,7 @@ class Currency():
         Dersom det oppstår en feil med listene så returnerer metoden en string som bearbeides i neste metode
         Hvis ikke legger den inn alle mulige verdier i to lister
         
-        Parametre:
+        Parametere:
             data (list): en parameter som du kan gi en bestemt verdi eller la være for å få data fra fetch_data
 
         Returnerer:
